@@ -8,8 +8,6 @@ Test API to save and retrieve customers from JSON file
 - [Installation](#installation)
 - [Usage](#usage)
 - [Running Tests](#running-tests)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
