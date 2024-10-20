@@ -1,0 +1,25 @@
+{
+  "name": "vscode",
+  "version": "1.0.0",
+  "main": "Test.js",
+  "scripts": {
+    "test": "mocha 'test/unit/**/*.unit.test.js' 'test/integration/**/*.integration.test.js'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "express": "^4.21.1",
+    "git": "^0.1.5",
+    "sinon": "^19.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.8",
+    "@babel/preset-env": "^7.25.8",
+    "@babel/register": "^7.25.7",
+    "mocha": "^10.7.3"
+  }
+}

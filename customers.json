@@ -1,0 +1,38 @@
+[
+  {
+    "firstname": "Adam",
+    "lastname": "Faulkner",
+    "address": "23 Albert Street",
+    "employeeid": 32
+  },
+  {
+    "firstname": "Alison",
+    "lastname": "Hughes",
+    "address": "1 Queen",
+    "employeeid": 33
+  },
+  {
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "address": "36 Customs Street",
+    "employeeid": 34
+  },
+  {
+    "firstname": "John",
+    "lastname": "West",
+    "address": "16 Quay Street",
+    "employeeid": 35
+  },
+  {
+    "firstname": "Ella",
+    "lastname": "Tucket",
+    "address": "7 Shortland Street",
+    "employeeid": 36
+  },
+  {
+    "firstname": "Ava",
+    "lastname": "King",
+    "address": "15 High Street",
+    "employeeid": 37
+  }
+]
