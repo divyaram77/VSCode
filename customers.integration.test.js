@@ -22,8 +22,8 @@ describe('Customers API Integration Tests', () => {
     // Clear and set up test data before each test
     beforeEach(async () => {
         const initialData = [
-            { firstname: 'John', lastname: 'Doe', address: '123 Main St', employeeid: 1 },
-            { firstname: 'Jane', lastname: 'Smith', address: '456 Elm St', employeeid: 2 }
+            { firstName: 'John', lastName: 'Doe', address: '123 Main St', employeeId: 1 },
+            { firstName: 'Jane', lastName: 'Smith', address: '456 Elm St', employeeId: 2 }
         ];
         await fs.writeFile(customersFilePath, JSON.stringify(initialData, null, 2), 'utf8');
     });
@@ -48,7 +48,7 @@ describe('Customers API Integration Tests', () => {
                 .end((err, res) => {
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.an('object');
-                    expect(res.body).to.have.property('employeeid', 1);
+                    expect(res.body).to.have.property('employeeId', 1);
                     done();
                 });
         });
@@ -85,10 +85,10 @@ describe('Customers API Integration Tests', () => {
         // Test case for writing customer detail and retrieving them from the file
         it('should create a new customer when valid data is provided', (done) => {
             const newCustomer = {
-                firstname: 'Alice',
-                lastname: 'Brown',
+                firstName: 'Alice',
+                lastName: 'Brown',
                 address: '789 Pine St',
-                employeeid: 3
+                employeeId: 3
             };
             chai.request(app)
                 .post('/customers')
@@ -102,7 +102,7 @@ describe('Customers API Integration Tests', () => {
                         .get('/customers/3') 
                         .end((err, res) => {
                             expect(res).to.have.status(200);
-                            expect(res.body).to.have.property('employeeid', 3);
+                            expect(res.body).to.have.property('employeeId', 3);
                             done();
                         });
                 });
@@ -111,10 +111,10 @@ describe('Customers API Integration Tests', () => {
         // Test case for validating duplicate customer insertion
         it('should return 400 when customer with the same employee ID exists', (done) => {
             const duplicateCustomer = {
-                firstname: 'John',
-                lastname: 'Doe',
+                firstName: 'John',
+                lastName: 'Doe',
                 address: '123 Main St',
-                employeeid: 1
+                employeeId: 1
             };
             chai.request(app)
                 .post('/customers')
@@ -129,9 +129,9 @@ describe('Customers API Integration Tests', () => {
         // Test case for validating the input for required fields
         it('should return 400 when required fields are missing', (done) => {
             const incompleteCustomer = {
-                firstname: 'Jane',
-                lastname: 'Doe',
-                employeeid: 4 // Missing firstname and address
+                firstName: 'Jane',
+                lastName: 'Doe',
+                employeeId: 4 // Missing firstname and address
             };
             chai.request(app)
                 .post('/customers')
@@ -146,8 +146,8 @@ describe('Customers API Integration Tests', () => {
         // Test case for validating the input for required fields and types and checking the error response for all the fields
         it('should return 400 when required fields are missing with all the fields details', (done) => {
             const incompleteCustomer = {
-                lastname: 'Doe',
-                employeeid: 4 // Missing firstname and address
+                lastName: 'Doe',
+                employeeId: 4 // Missing firstname and address
             };
             chai.request(app)
                 .post('/customers')
@@ -163,10 +163,10 @@ describe('Customers API Integration Tests', () => {
         // Test case for validating the input for input data types
         it('should return 400 when field types are invalid', (done) => {
             const incompleteCustomer = {
-                firstname: 'John',
-                lastname: 'Doe',
+                firstName: 'John',
+                lastName: 'Doe',
                 address: 123,
-                employeeid: '4' // Invalid address and employee id types
+                employeeId: '4' // Invalid address and employee id types
             };
             chai.request(app)
                 .post('/customers')
@@ -187,10 +187,10 @@ describe('Customers API Integration Tests', () => {
             fs.writeFile(customersFilePath, 'not a json', 'utf8')
                 .then(() => {
                     const newCustomer = {
-                        firstname: 'Error',
-                        lastname: 'Customer',
+                        firstName: 'Error',
+                        lastName: 'Customer',
                         address: 'Somewhere',
-                        employeeid: 5
+                        employeeId: 5
                     };
                     chai.request(app)
                         .post('/customers')
@@ -230,11 +230,11 @@ describe('Concurrent Modifications Test', () => {
         const initialLength = initialCustomers.length;
 
         const newCustomers = [
-            { firstname: 'Adam', lastname: 'West', address: '123 Elm St', employeeid: 38 },
-            { firstname: 'Bruce', lastname: 'Wayne', address: '456 Wayne Manor', employeeid: 39 },
-            { firstname: 'Harry', lastname: 'Potter', address: '789 Private Drive', employeeid: 40 },
-            { firstname: 'Hermione', lastname: 'Granger', address: '111 Godrics Hollow', employeeid: 41 },
-            { firstname: 'Ron', lastname: 'Weasley', address: '222 Burrow', employeeid: 42 }
+            { firstName: 'Adam', lastName: 'West', address: '123 Elm St', employeeId: 38 },
+            { firstName: 'Bruce', lastName: 'Wayne', address: '456 Wayne Manor', employeeId: 39 },
+            { firstName: 'Harry', lastName: 'Potter', address: '789 Private Drive', employeeId: 40 },
+            { firstName: 'Hermione', lastName: 'Granger', address: '111 Godrics Hollow', employeeId: 41 },
+            { firstName: 'Ron', lastName: 'Weasley', address: '222 Burrow', employeeId: 42 }
 
         ];
 
@@ -253,7 +253,3 @@ describe('Concurrent Modifications Test', () => {
         expect(finalCustomers).to.have.lengthOf(initialLength + newCustomers.length);
     });
 });
-
-
-
-
