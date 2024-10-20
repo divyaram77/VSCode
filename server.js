@@ -35,7 +35,7 @@ async function writeCustomersFile(data) {
 app.get('/customers/:id', async function (req, res, next) {
     try {
         const customers = await readCustomersFile();
-        const customer = customers.find(c => c.employeeid === parseInt(req.params.id));
+        const customer = customers.find(c => c.employeeId === parseInt(req.params.id));
 
         //Validation to check customer existence
         if (!customer) {
@@ -55,8 +55,8 @@ app.post('/customers', async (req, res, next) => {
     try {
         await acquireLock();  // Acquire lock for writing
         const customers = await readCustomersFile();
-        const { firstname, lastname, address, employeeid } = req.body;
-        const newCust = { firstname, lastname, address, employeeid };
+        const { firstName, lastName, address, employeeId } = req.body;
+        const newCust = { firstName, lastName, address, employeeId };
 
         // Validate input customer data
         const errors = validateCustomerData(newCust,customers);
@@ -70,7 +70,7 @@ app.post('/customers', async (req, res, next) => {
         // Once validation is successful add the new customer to the file
         customers.push(newCust);
         await writeCustomersFile(customers);
-        res.status(201).send(`Customer with ID ${employeeid} created successfully`);
+        res.status(201).send(`Customer with ID ${employeeId} created successfully`);
     }
     catch (err) {
         next(err);  // Pass error to the middleware exception handler
@@ -83,21 +83,21 @@ app.post('/customers', async (req, res, next) => {
 // Function to validate input customer data
 function validateCustomerData(customer, existingCustomers) {
     const errors = [];
-    const existingCustomer = existingCustomers.find(c => c.employeeid === customer.employeeid);
+    const existingCustomer = existingCustomers.find(c => c.employeeId === customer.employeeId);
 
     if (existingCustomer) {
-        errors.push(`Customer with employee Id ${customer.employeeid} exists`);
+        errors.push(`Customer with employee Id ${customer.employeeId} exists`);
     }
-    if (!customer.firstname || typeof customer.firstname !== 'string') {
+    if (!customer.firstName || typeof customer.firstName !== 'string') {
         errors.push('Firstname is required and must be a string');
     }
-    if (!customer.lastname || typeof customer.lastname !== 'string') {
+    if (!customer.lastName || typeof customer.lastName !== 'string') {
         errors.push('Last name is required and must be a string.');
     }
     if (!customer.address || typeof customer.address !== 'string') {
         errors.push('Address is required and must be a string.');
     }
-    if (!customer.employeeid || typeof customer.employeeid !== 'number') {
+    if (!customer.employeeId || typeof customer.employeeId !== 'number') {
         errors.push('Employee ID is required and must be a number.');
     }
     return errors;
